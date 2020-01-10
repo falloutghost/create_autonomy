@@ -32,6 +32,8 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "ca_msgs/Bumper.h"
 #include "ca_msgs/DefineSong.h"
 #include "ca_msgs/PlaySong.h"
+#include "ca_msgs/Cliff.h"
+#include "ca_msgs/Wheeldrop.h"
 
 #include "create/create.h"
 
@@ -70,6 +72,8 @@ private:
   ca_msgs::Mode mode_msg_;
   ca_msgs::ChargingState charging_state_msg_;
   ca_msgs::Bumper bumper_msg_;
+  ca_msgs::Cliff cliff_msg_;
+  ca_msgs::Wheeldrop wheeldrop_msg_;
   nav_msgs::Odometry odom_msg_;
   geometry_msgs::TransformStamped tf_odom_;
   ros::Time last_cmd_vel_time_;
@@ -100,6 +104,7 @@ private:
   void undockCallback(const std_msgs::EmptyConstPtr& msg);
   void defineSongCallback(const ca_msgs::DefineSongConstPtr& msg);
   void playSongCallback(const ca_msgs::PlaySongConstPtr& msg);
+  void mainMotorCallback(const std_msgs::Float32ConstPtr& msg);
 
   bool update();
   void updateBatteryDiagnostics(diagnostic_updater::DiagnosticStatusWrapper& stat);
@@ -114,6 +119,7 @@ private:
   void publishOmniChar();
   void publishMode();
   void publishBumperInfo();
+  void publishCliffInfo();
   void publishWheeldrop();
 
 protected:
@@ -128,6 +134,7 @@ protected:
   ros::Subscriber set_ascii_sub_;
   ros::Subscriber dock_sub_;
   ros::Subscriber undock_sub_;
+  ros::Subscriber main_motor_sub_;
   ros::Subscriber define_song_sub_;
   ros::Subscriber play_song_sub_;
 
@@ -148,6 +155,7 @@ protected:
   ros::Publisher omni_char_pub_;
   ros::Publisher mode_pub_;
   ros::Publisher bumper_pub_;
+  ros::Publisher cliff_pub_;
   ros::Publisher wheeldrop_pub_;
   ros::Publisher wheel_joint_pub_;
 
