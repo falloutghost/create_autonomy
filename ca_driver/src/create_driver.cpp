@@ -140,6 +140,7 @@ CreateDriver::CreateDriver(ros::NodeHandle& nh)
   omni_char_pub_ = nh.advertise<std_msgs::UInt16>("ir_omni", 30);
   mode_pub_ = nh.advertise<ca_msgs::Mode>("mode", 30);
   bumper_pub_ = nh.advertise<ca_msgs::Bumper>("bumper", 30);
+  cliff_pub_ = nh.advertise<std_msgs::Empty>("cliff", 30);
   wheeldrop_pub_ = nh.advertise<std_msgs::Empty>("wheeldrop", 30);
   wheel_joint_pub_ = nh.advertise<sensor_msgs::JointState>("joint_states", 10);
 
@@ -279,6 +280,7 @@ bool CreateDriver::update()
   publishOmniChar();
   publishMode();
   publishBumperInfo();
+  publishCliff();
   publishWheeldrop();
 
   // If last velocity command was sent longer than latch duration, stop robot
@@ -615,6 +617,12 @@ void CreateDriver::publishBumperInfo()
   }
 
   bumper_pub_.publish(bumper_msg_);
+}
+
+void CreateDriver::publishCliff()
+{
+  if (robot_->isCliff())
+    cliff_pub_.publish(empty_msg_);
 }
 
 void CreateDriver::publishWheeldrop()
