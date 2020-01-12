@@ -114,6 +114,7 @@ private:
   void publishOmniChar();
   void publishMode();
   void publishBumperInfo();
+  void publishCliff();
   void publishWheeldrop();
 
 protected:
@@ -148,6 +149,7 @@ protected:
   ros::Publisher omni_char_pub_;
   ros::Publisher mode_pub_;
   ros::Publisher bumper_pub_;
+  ros::Publisher cliff_pub_;
   ros::Publisher wheeldrop_pub_;
   ros::Publisher wheel_joint_pub_;
 
