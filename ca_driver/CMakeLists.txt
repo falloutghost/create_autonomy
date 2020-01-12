@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(ca_driver)
 
-find_package(libcreate REQUIRED PATHS ./lib/libcreate)
-
 find_package(catkin REQUIRED COMPONENTS
   ca_msgs
   diagnostic_msgs
@@ -31,14 +29,29 @@ catkin_package(
   DEPENDS libcreate
 )
 
+include(ExternalProject)
+ExternalProject_Add(libcreate
+  GIT_REPOSITORY https://github.com/falloutghost/libcreate_patched
+  GIT_TAG 2.0.1
+  PREFIX ${CATKIN_DEVEL_PREFIX}
+  CONFIGURE_COMMAND cmake .
+  BUILD_COMMAND make
+  INSTALL_COMMAND echo "No install"
+  BUILD_IN_SOURCE 1
+)
+
+set(libcreate_PATH "${CATKIN_DEVEL_PREFIX}/src/libcreate/")
+
 roslint_cpp()
 roslint_add_test()
 
 include_directories(
   include
-  ${libcreate_INCLUDE_DIRS}
+  ${libcreate_PATH}/include
   ${catkin_INCLUDE_DIRS}
 )
+
+link_directories(${libcreate_PATH})
 
 add_executable(${PROJECT_NAME} src/create_driver.cpp)
 
