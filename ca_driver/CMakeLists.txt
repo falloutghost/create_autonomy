@@ -16,6 +16,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 catkin_package(
   INCLUDE_DIRS include
+  LIBRARIES libcreate
   CATKIN_DEPENDS
     ca_msgs
     diagnostic_msgs
@@ -26,7 +27,6 @@ catkin_package(
     sensor_msgs
     std_msgs
     tf
-  DEPENDS libcreate
 )
 
 include(ExternalProject)
