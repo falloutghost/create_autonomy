@@ -622,22 +622,18 @@ void CreateDriver::publishBumperInfo()
 void CreateDriver::publishCliff()
 {
   if (robot_->isCliffLeft()) {
-    string_msg_.header.stamp = ros::Time::now();
     string_msg_.data = "cliff_left";
     cliff_pub_.publish(string_msg_);
   }
   if (robot_->isCliffFrontLeft()) {
-    string_msg_.header.stamp = ros::Time::now();
     string_msg_.data = "cliff_front_left";
     cliff_pub_.publish(string_msg_);
   }
   if (robot_->isCliffRight()) {
-    string_msg_.header.stamp = ros::Time::now();
     string_msg_.data = "cliff_right";
     cliff_pub_.publish(string_msg_);
   }
   if (robot_->isCliffFrontRight()) {
-    string_msg_.header.stamp = ros::Time::now();
     string_msg_.data = "cliff_front_right";
     cliff_pub_.publish(string_msg_);
   }
