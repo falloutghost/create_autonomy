@@ -47,6 +47,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include <std_msgs/Int16.h>
 #include <std_msgs/UInt16.h>
 #include <std_msgs/UInt8MultiArray.h>
+#include <std_msgs/String.h>
 #include <tf/transform_broadcaster.h>
 
 #include <limits>
