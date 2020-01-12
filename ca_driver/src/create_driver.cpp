@@ -140,7 +140,7 @@ CreateDriver::CreateDriver(ros::NodeHandle& nh)
   omni_char_pub_ = nh.advertise<std_msgs::UInt16>("ir_omni", 30);
   mode_pub_ = nh.advertise<ca_msgs::Mode>("mode", 30);
   bumper_pub_ = nh.advertise<ca_msgs::Bumper>("bumper", 30);
-  cliff_pub_ = nh.advertise<std_msgs::Empty>("cliff", 30);
+  cliff_pub_ = nh.advertise<std_msgs::String>("cliff", 30);
   wheeldrop_pub_ = nh.advertise<std_msgs::Empty>("wheeldrop", 30);
   wheel_joint_pub_ = nh.advertise<sensor_msgs::JointState>("joint_states", 10);
 
@@ -621,8 +621,26 @@ void CreateDriver::publishBumperInfo()
 
 void CreateDriver::publishCliff()
 {
-  if (robot_->isCliff())
-    cliff_pub_.publish(empty_msg_);
+  if (robot_->isCliffLeft()) {
+    string_msg_.header.stamp = ros::Time::now();
+    string_msg_.data = "cliff_left";
+    cliff_pub_.publish(string_msg_);
+  }
+  if (robot_->isCliffFrontLeft()) {
+    string_msg_.header.stamp = ros::Time::now();
+    string_msg_.data = "cliff_front_left";
+    cliff_pub_.publish(string_msg_);
+  }
+  if (robot_->isCliffRight()) {
+    string_msg_.header.stamp = ros::Time::now();
+    string_msg_.data = "cliff_right";
+    cliff_pub_.publish(string_msg_);
+  }
+  if (robot_->isCliffFrontRight()) {
+    string_msg_.header.stamp = ros::Time::now();
+    string_msg_.data = "cliff_front_right";
+    cliff_pub_.publish(string_msg_);
+  }
 }
 
 void CreateDriver::publishWheeldrop()

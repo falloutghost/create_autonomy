@@ -77,6 +77,7 @@ private:
   std_msgs::Float32 float32_msg_;
   std_msgs::UInt16 uint16_msg_;
   std_msgs::Int16 int16_msg_;
+  std_msgs::String string_msg_;
   sensor_msgs::JointState joint_state_msg_;
   bool is_running_slowly_;
 
