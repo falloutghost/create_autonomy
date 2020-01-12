@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(ca_driver)
 
-find_package(libcreate REQUIRED)
+find_package(libcreate REQUIRED PATHS ./lib/libcreate)
 
 find_package(catkin REQUIRED COMPONENTS
   ca_msgs
