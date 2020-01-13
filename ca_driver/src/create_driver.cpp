@@ -91,6 +91,7 @@ CreateDriver::CreateDriver(ros::NodeHandle& nh)
   mode_msg_.header.frame_id = base_frame_;
   bumper_msg_.header.frame_id = base_frame_;
   charging_state_msg_.header.frame_id = base_frame_;
+  cliff_signal_msg_.header.frame_id = base_frame_;
   tf_odom_.header.frame_id = odom_frame_;
   tf_odom_.child_frame_id = base_frame_;
   odom_msg_.header.frame_id = odom_frame_;
@@ -141,7 +142,7 @@ CreateDriver::CreateDriver(ros::NodeHandle& nh)
   mode_pub_ = nh.advertise<ca_msgs::Mode>("mode", 30);
   bumper_pub_ = nh.advertise<ca_msgs::Bumper>("bumper", 30);
   cliff_pub_ = nh.advertise<std_msgs::String>("cliff", 30);
-  cliff_signal_pub_ = nh.advertise<std_msgs::UInt16>("cliff_signal", 30);
+  cliff_signal_pub_ = nh.advertise<std_msgs::CliffSignal>("cliff_signal", 30);
   wheeldrop_pub_ = nh.advertise<std_msgs::Empty>("wheeldrop", 30);
   wheel_joint_pub_ = nh.advertise<sensor_msgs::JointState>("joint_states", 10);
 
@@ -643,8 +644,12 @@ void CreateDriver::publishCliff()
 
 void CreateDriver::publishCliffSignal()
 {
-  uint16_msg_.data = robot_->getCliffSignalFrontLeft();
-  cliff_signal_pub_.publish(uint16_msg_);
+  cliff_signal_msg_.cliff_signal_left = robot_->getCliffSignalLeft();
+  cliff_signal_msg_.cliff_signal_front_left = robot_->getCliffSignalFrontLeft();
+  cliff_signal_msg_.cliff_signal_right = robot_->getCliffSignalRight();
+  cliff_signal_msg_.cliff_signal_front_right = robot_->getCliffSignalFrontRight();
+
+  cliff_signal_pub_.publish(cliff_signal_msg_);
 }
 
 void CreateDriver::publishWheeldrop()

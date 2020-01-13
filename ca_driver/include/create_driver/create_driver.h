@@ -32,6 +32,7 @@ POSSIBILITY OF SUCH DAMAGE.
 #include "ca_msgs/Bumper.h"
 #include "ca_msgs/DefineSong.h"
 #include "ca_msgs/PlaySong.h"
+#include "ca_msgs/CliffSignal.h"
 
 #include "create/create.h"
 
@@ -71,6 +72,7 @@ private:
   ca_msgs::Mode mode_msg_;
   ca_msgs::ChargingState charging_state_msg_;
   ca_msgs::Bumper bumper_msg_;
+  ca_msgs::CliffSignal cliff_signal_msg_;
   nav_msgs::Odometry odom_msg_;
   geometry_msgs::TransformStamped tf_odom_;
   ros::Time last_cmd_vel_time_;
