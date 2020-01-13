@@ -117,6 +117,7 @@ private:
   void publishMode();
   void publishBumperInfo();
   void publishCliff();
+  void publishCliffSignal();
   void publishWheeldrop();
 
 protected:
@@ -152,6 +153,7 @@ protected:
   ros::Publisher mode_pub_;
   ros::Publisher bumper_pub_;
   ros::Publisher cliff_pub_;
+  ros::Publisher cliff_signal_pub_;
   ros::Publisher wheeldrop_pub_;
   ros::Publisher wheel_joint_pub_;
 
