@@ -142,7 +142,7 @@ CreateDriver::CreateDriver(ros::NodeHandle& nh)
   mode_pub_ = nh.advertise<ca_msgs::Mode>("mode", 30);
   bumper_pub_ = nh.advertise<ca_msgs::Bumper>("bumper", 30);
   cliff_pub_ = nh.advertise<std_msgs::String>("cliff", 30);
-  cliff_signal_pub_ = nh.advertise<std_msgs::CliffSignal>("cliff_signal", 30);
+  cliff_signal_pub_ = nh.advertise<ca_msgs::CliffSignal>("cliff_signal", 30);
   wheeldrop_pub_ = nh.advertise<std_msgs::Empty>("wheeldrop", 30);
   wheel_joint_pub_ = nh.advertise<sensor_msgs::JointState>("joint_states", 10);
 
