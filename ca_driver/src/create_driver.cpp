@@ -45,7 +45,7 @@ CreateDriver::CreateDriver(ros::NodeHandle& nh)
   priv_nh_.param<std::string>("base_frame", base_frame_, "base_footprint");
   priv_nh_.param<std::string>("odom_frame", odom_frame_, "odom");
   priv_nh_.param<double>("latch_cmd_duration", latch_duration_, 0.2);
-  priv_nh_.param<double>("loop_hz", loop_hz_, 10.0);
+  priv_nh_.param<double>("loop_hz", loop_hz_, 100.0);
   priv_nh_.param<bool>("publish_tf", publish_tf_, true);
 
   if (robot_model_name == "ROOMBA_400")
